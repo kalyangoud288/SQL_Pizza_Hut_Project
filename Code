@@ -1,0 +1,49 @@
+// customer table
+
+CREATE TABLE `customer` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `cust_first_name` varchar(50) DEFAULT NULL,
+  `cust_last_name` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+// item table
+
+CREATE TABLE `item` (
+  `id` varchar(50) NOT NULL,
+  `item_name` varchar(100) DEFAULT NULL,
+  `item_cat` varchar(100) DEFAULT NULL,
+  `item_size` varchar(10) DEFAULT NULL,
+  `item_price` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+// address table
+
+CREATE TABLE `address` (
+  `add_id` varchar(50) NOT NULL,
+  `delivery_address1` varchar(100) DEFAULT NULL,
+  `delivery_address2` varchar(100) DEFAULT NULL,
+  `delivery_city` varchar(50) DEFAULT NULL,
+  `delivery_zip_code` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`add_id`)
+);
+
+// orders table
+
+CREATE TABLE `orders` (
+  `row_id` int NOT NULL AUTO_INCREMENT,
+  `order_id` int DEFAULT NULL,
+  `item_id` varchar(50) DEFAULT NULL,
+  `quantity` int DEFAULT NULL,
+  `cust_id` int DEFAULT NULL,
+  `add_id` varchar(50) DEFAULT NULL,
+  `created_at` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`row_id`),
+  KEY `cust_id` (`cust_id`),
+  KEY `item_id` (`item_id`),
+  KEY `add_id` (`add_id`),
+  CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`cust_id`) REFERENCES `customer` (`id`),
+  CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`),
+  CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`add_id`) REFERENCES `address` (`add_id`)
+);
